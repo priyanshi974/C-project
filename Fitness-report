@@ -1,0 +1,144 @@
+#include<iostream>
+#include<string.h>
+#include<math.h>
+#include<stdio.h>
+#include<cstdlib>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    //THIS SOURCE CODE IS WRITTEN BY PRIYANSHI, CSE STUDENT AT NITJ.
+	char name[30], gender, a, b, c, d;
+	int age;
+	float weight, height, waist, hip, neck;
+
+	cout << "This calculator works for those in the age range of 18 to 60 years." << endl;
+	cout << "The results are to alert you about your overall health status and should not be taken as confirmatory diagnosis." << endl;
+	cout << "In case of doubts please consult your physician." << endl;
+
+	cout << endl;
+	cout << "BASIC PROFILE " << endl <<"-------------"<< endl;
+	cout << endl <<"Enter your name:";
+	gets(name);
+	cout << "Enter your age:";
+	cin >> age;
+	cout <<"Enter your gender(M/F):";
+	cin >> gender;
+	cout << endl;
+
+	cout << "BODY MEASUREMENTS " << endl <<"-----------------" << endl;
+	cout << endl <<"Enter your weight in kgs:";
+	cin >> weight;
+	cout << endl <<"Enter your height, (in metres)" << endl << "{Make sure you stand straight and look forward}:";
+	cin >> height;
+	cout << endl <<"Enter your waist size(in inches)" << endl << "{Smallest portion of your waist above stomach}:" ;
+	cin >> waist;
+	cout << endl <<"Enter your hip size(in inches)" << endl << "{Measure hip circumference at widest part}:";
+	cin >> hip;
+	cout << endl <<"Enter your neck size(in inches)" << endl << "{Measure neck circumference just below larynx}:";
+	cin >> neck;
+	cout << endl;
+
+	cout << "PLEASE CHECK THE BELOW STATEMENTS(WITH Y/N)" << endl << "--------------------------------------------" << endl;
+	if(gender == 'F')
+        {cout << endl << "Are you pregnant?";
+    cin >> a;}
+    cout << endl <<"Do you smoke cigarettes?";
+    cin >> b;
+    cout << endl <<"Have you recently suffered an injury?";
+    cin >> c;
+    cout << endl <<"Do you have hypertension?";
+    cin >> d;
+    cout << endl << endl <<"THANK YOU FOR FILLING OUT THE ABOVE FORM."<<endl << endl;
+    cout << "********************************************************************************************" << endl;
+    cout << "********************************************************************************************" << endl << endl;
+
+    cout << "SO HERE ARE YOUR HEALTH RESULTS!!!"<< endl << endl;
+    cout <<"NAME = ";
+    printf("%s", name);
+    cout << endl <<"AGE = "<< age << endl << "GENDER = " << gender << endl;
+
+    double BMI, BFP, BMR, BWP, LBM;
+    //calculation of body mass index
+    BMI = weight/(height*height);
+    cout << endl << "1. According to given data your BMI(body mass index) is " << BMI << endl;
+    if(BMI > 30)
+        cout << "Your body is fat.";
+    else if(BMI > 25)
+        cout << "You are overweight.";
+    else if(BMI > 18.5)
+        cout << "Your body weight is normal.";
+    else cout << "Your body is thin than required.";
+    cout << endl << "If(BMI > 30) fat body type." << endl;
+    cout << "If(30 < BMI > 25) overweight body type." << endl;
+    cout << "If(25 =< BMI >= 18.5) normal body type." << endl;
+    cout << "If(BMI < 18.5) thin body type.";
+    cout << endl << endl;
+
+    //calculation of body fat percentage
+    int p;
+    if(gender == 'M')
+        p = 0;
+    else p = 1;
+    BFP = -54.988 + (0.503*age) + (10.689*p) + (3.172*BMI) - (0.026*BMI*BMI) + (0.181*BMI*p) + (0.02*BMI*age) - (0.005*BMI*BMI*p) + (0.00021*BMI*BMI*age);
+    cout << "2. Your body fat percentage(BFP) is "<< BFP << endl;
+    cout <<"The BFP shows the proportion of adipose tissue in body composition."<<endl;
+    cout << "You can compare your BFP with these recommended values in the table below." << endl;
+    cout << "Essential fat: 10-13%(women), 2-5%(men)" << endl << "Athletes: 14-20%(women), 6-13%(men)" << endl;
+    cout << "Fitness: 21-24%(women), 14-17%(men)" << endl << "Average: 25-31%(women), 18-24%(men)" << endl;
+    cout << "Obese: 32%+(women), 25%+(men)" << endl << endl;
+
+    //calculation of basal metabolic rate
+    if(gender == 'M')
+        BMR = 10*weight + 625*height - 5*age + 5;
+    else BMR = 10*weight + 625*height - 5*age - 161;
+    //calculated with the help of Mifflin St. Jeor equation
+    cout << "3. Your basal metabolic rate(BMR) is " << BMR << " kcal/day." << endl;
+    cout << "BMR is the amount of energy expended per day at rest. In other words, calories required by the body " << endl;
+    cout << "According to sources, the average BMR for women is around 1400 cal and for men is over 1600 cal per day." << endl << endl;
+
+   //calculating the ideal body weight
+    double IBW, heightinfeet;
+    //converting height from meters to feet
+    heightinfeet = height/0.3048;
+    float j;
+    j = (heightinfeet - 5)*10;
+    if(gender == 'M')
+        IBW = 50 + 2.3*j;
+    else IBW = 44 + 2.3*j;
+    cout << "4. Your ideal body weight is estimated to be around " << IBW << endl;
+    cout << "The ideal body weight may vary according to a person's fitness level." << endl << endl;
+
+    LBM = weight - weight*(BFP/100);
+    cout << "5. Lean body mass = "<< LBM << endl;
+    cout << "Lean body mass is the weight of your body excluding the body fat." << endl << endl;
+
+    //calculating the total body water(TBW)
+    double TBW;
+    if(gender == 'M')
+        TBW = 2.447 - 0.009156*age + 10.74*height + 0.3362*weight;
+    else TBW = -2.097 + 10.69*height + 0.2466*weight;
+    BWP = (TBW/weight)*100;
+    cout << "6. Your body water percentage is "<< BWP<<"%." << endl;
+    cout << "You can check the recommended water level in the table below:-"<<endl;
+    cout << "Insufficient: (<53%)men, (<45%)women" << endl;
+    cout << "Normal: (53-65%)men, (45-56%)women" << endl << "Excellent: (>65%)men, (56%)women" << endl << endl;
+
+    //calculation of visceral fat
+    cout << "Visceral fat area in the body can lead to health related complications that are more likely to occur."<< endl;
+    if((gender == 'M' && waist>40) || (gender == 'F' && waist>35))
+        cout << "7. You need to be really alert of your health. It is advisable to consult a physician.";
+    else cout << "7. Your visceral fat is in control. You don't need to worry about it.";
+    cout << endl << endl;
+
+    cout << "        THAT WAS ALL FOR YOUR SELF BODY CHECK." << endl;
+    cout << "        STAY HEALTHY, STAY SAFE." << endl << endl;
+
+    cout << "Press the enter key to exit." << endl;
+    system("PAUSE");
+
+
+return 0;
+}
+
